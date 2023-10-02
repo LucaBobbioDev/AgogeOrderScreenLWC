@@ -1,0 +1,43 @@
+<template>
+    <lightning-card title="Pedido">
+        <lightning-progress-indicator current-step={current}>
+            <lightning-progress-step 
+                label="Pedido" 
+                value="step1">
+            </lightning-progress-step>
+            <lightning-progress-step 
+                label="Itens" 
+                value="step2">
+            </lightning-progress-step>
+            <lightning-progress-step    
+                label="Resumo" 
+                value="step3">
+            </lightning-progress-step>
+        </lightning-progress-indicator>
+        <div class="slds-show slds-var-m-around_small">
+            <template if:true={showOrderHeader}>
+                <c-order-header
+                    account-id={selectedAccountId}
+                    oncleardata={handleClearOrderHeader}
+                    onorderheader={handleOrderHeader}
+                    oncleanaccount={handleCleanAccount}>
+                </c-order-header>
+            </template>
+            <template if:true={showOrderItem}>
+                <c-order-item
+                    onorderitem={handleOrderItem}>
+                </c-order-item>
+            </template>
+            <template if:true={showOrderSummary}>
+                <c-order-summary
+                    onordersummary={handleOrderSummary}
+                    order-header={orderHeaderData}
+                    order-item-data={orderItemData}
+                    deleted-order-items={deletedOrderItems}
+                    onresetorderscreen={handleResetScreen}
+                    current-order={currentOrder}>
+                </c-order-summary>
+            </template>
+        </div>
+    </lightning-card>
+</template>

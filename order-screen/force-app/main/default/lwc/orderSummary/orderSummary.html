@@ -1,0 +1,188 @@
+<template>
+    <div> 
+        <div class="slds-box">
+            <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-account">
+                                    <lightning-icon icon-name='standard:person_account' alternative-text='Conta' size='medium' title='Conta'></lightning-icon>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h2>
+                                            <span class="slds-page-header__title slds-truncate" title={orderHeader.accountName}>{orderHeader.accountName}</span>
+                                        </h2>
+                                        <span>Nome da conta</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center">
+                <div class="slds-size_1-of-4 slds-col slds-page-header orderheader-detail">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                        <lightning-icon icon-name='standard:payment_gateway' alternative-text='payment_gateway' size='small' title='payment_gateway'></lightning-icon>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <span class="slds-page-header__title slds-truncate header-subtitle" title={orderHeader.paymentConditionName}>
+                                                {orderHeader.paymentConditionName}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <p class="slds-page-header__name-meta">Condição de pagamento</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-size_1-of-4 slds-col slds-page-header orderheader-detail">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                        <lightning-icon icon-name='standard:address' alternative-text='address' size='small' title='address'></lightning-icon>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <span class="slds-page-header__title slds-truncate header-subtitle" title={orderHeader.addressName}>
+                                                {orderHeader.addressName}                                            
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <p class="slds-page-header__name-meta">Endereço</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-size_1-of-4 slds-col slds-page-header orderheader-detail">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                        <lightning-icon icon-name='standard:price_books' alternative-text='Catálogo de preços' size='small' title='Catálogo de preços'></lightning-icon>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <span class="slds-page-header__title slds-truncate header-subtitle" title={orderHeader.pricebookName}>
+                                                {orderHeader.pricebookName}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <p class="slds-page-header__name-meta">Catálogo de preços</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-size_1-of-4 slds-col slds-page-header orderheader-detail">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                        <lightning-icon icon-name='custom:custom41' alternative-text='valor mínimo' size='small' title='valor mínimo'></lightning-icon>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <span class="slds-page-header__title slds-truncate header-subtitle" title="Valor mínimo">
+                                                <lightning-formatted-number value={minValue} format-style="currency"></lightning-formatted-number>
+                                            </span>
+                                        </div>
+                                    </div>  
+                                    <p class="slds-page-header__name-meta">Valor mínimo do trimestre</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="slds-box slds-var-m-vertical_small">
+            <div>
+                <p>Produtos do Pedido</p>
+            </div>
+            <div>
+                <lightning-datatable
+                    hide-checkbox-column="true"
+                    key-field="productId"
+                    data={orderItemDataSummary}
+                    columns={columns}>
+                </lightning-datatable>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center slds-var-m-vertical_small">
+            <div class="slds-size_3-of-4 slds-col">
+                <lightning-textarea
+                    label="Observações:"
+                    value={orderHeader.description}
+                    readonly>
+                </lightning-textarea>
+            </div>
+
+            <div class="slds-size_1-of-4 slds-col slds-page-header orderheader-detail">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <p class="slds-page-header__name-meta header-totalamount">Valor total:</p>
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <span class="slds-page-header__title slds-truncate header-subtitle" title="Valor total">
+                                    <lightning-formatted-number
+                                        class="header-totalamount"
+                                        value={totalOrderValue} 
+                                        format-style="currency">
+                                    </lightning-formatted-number>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <div slot="footer" class="slds-var-m-bottom_medium">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-button 
+                        class="slds-float_left"
+                        label="Retornar aos produtos" 
+                        onclick={handleBackTo}>
+                    </lightning-button>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-button 
+                        class="slds-float_right"
+                        label="Finalizar pedido"
+                        variant="brand"
+                        onclick={handleFinish}>
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+	</div>
+</template>

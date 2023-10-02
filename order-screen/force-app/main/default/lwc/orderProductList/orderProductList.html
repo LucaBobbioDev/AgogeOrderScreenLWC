@@ -1,0 +1,32 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="container">
+        <template for:each={orderProducts} for:item="product">
+            <div 
+                key={product.productId}
+                class="products-card-container"
+            >
+                <c-order-product-card    
+                    product={product}>
+                </c-order-product-card>
+            </div>
+        </template>
+        <div class="button-pagination-container">
+            <lightning-button-icon
+                icon-name="utility:chevronleft"
+                variant="brand"
+                disabled={isFirstPage}
+                onclick={handlePreviousPage}>
+            </lightning-button-icon>
+            <span>
+                {currentPage} de {totalPages}
+            </span>
+            <lightning-button-icon
+                icon-name="utility:chevronright"
+                variant="brand"
+                disabled={isLastPage}
+                onclick={handleNextPage}>
+            </lightning-button-icon>
+        </div>
+    </div>
+</template>

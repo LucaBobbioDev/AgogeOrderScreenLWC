@@ -1,0 +1,18 @@
+.custom-container_right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    margin: 10px;
+}
+
+.input-container {
+    margin-right: 2em;
+}
+
+.input-search {
+    width: 25.5em;
+}
+
+.shopping-cart-container{
+    margin-left: 1.5em;
+}

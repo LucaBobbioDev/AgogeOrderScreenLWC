@@ -1,0 +1,47 @@
+<template>
+    <lightning-card>
+        <div class="custom-container_right">
+            <div class="input-container">
+                <lightning-input
+                    type="search"
+                    label="Pesquisa por Produtos"
+                    onchange={handleSearch}
+                    class="input-search">
+                </lightning-input>
+            </div>
+            <div class="shopping-cart-container">
+                <c-shopping-cart onproductdeleted={handleProductDeleted}></c-shopping-cart>
+            </div>
+        </div>
+        <div>
+            <c-order-product-list 
+                context="orderItem"
+                search-term={searchTerm} 
+                onproductselected={handleProductSelected}
+                onorderitemchange={handleOrderItemChange}
+                order-item-summary={orderItemData}>
+            </c-order-product-list>
+        </div>
+        <div slot="footer" class="slds-var-p-horizontal_small slds-col slds-size_12-of-12 slds-var-m-bottom_medium">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-button
+                        class="slds-float_left"
+                        label="Voltar para pedido"
+                        name="previous"
+                        onclick={handleNavigation}>
+                    </lightning-button>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-button
+                        class="slds-float_right"
+                        label="Ir para o resumo"
+                        variant="brand"
+                        name="next"
+                        onclick={handleNavigation}>
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,25 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3.75px;
+
+    justify-items: center;
+    align-items: start;
+}
+
+.products-card-container{
+    margin: 10px;
+}
+
+.button-pagination-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button-pagination-container span, lightning-button{
+    margin: 1em;
+    padding: 0 5px;
+}

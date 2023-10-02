@@ -1,0 +1,126 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class={orderItemContainerClass}>
+		<div class="slds-grid "> 
+			<header class="header slds-wrap slds-p-around_small"> 
+				<div class="slds-col slds-size_1-of-12">
+					<lightning-icon 
+						icon-name='utility:products' 
+						alternative-text='products' 
+						variant='default' 
+						size='small' 
+						title='Produto'>
+					</lightning-icon>
+				</div>
+				<div class="slds-col slds-size_7-of-12 slds-text-align_left" title={orderItem.productName}>
+					<span>{orderItem.productName}</span>
+				</div>
+				<div class="slds-col slds-size_4-of-12 slds-float_right">
+                    <button 
+						class={buttonClass} 
+						title="Adicionar ao carrinho"
+						onclick={onClickCart}> 
+						<p>{buttonText}</p>&nbsp;
+						<lightning-icon 
+							icon-name={iconType}
+							variant={iconVariant}
+							alternative-text="Adicionar ao carrinho" 
+							size={iconSize}
+							title="Adicionar ao carrinho">
+						</lightning-icon>
+					</button>
+				</div>
+			</header>
+		</div>
+		<div>
+			<lightning-layout multiple-rows>
+				<lightning-layout-item size="6" class="card-fields">
+					<lightning-input
+						name="unitPrice"
+						label="Preço"
+						value={orderItem.unitPrice}
+						type="number"
+						formatter="currency"
+						step=".01"
+						onchange={changeUnitPrice}>
+					</lightning-input>
+				</lightning-layout-item>
+				<lightning-layout-item size="6" class="card-fields">
+                    <lightning-input
+						name="discount"
+						label="Desconto (%)"
+						value={orderItem.discount}
+						type="number"
+						min="0.00"
+						max="100.00"
+						step=".01"
+						maxlength="5"
+						onchange={changeDiscount}>
+					</lightning-input>
+				</lightning-layout-item>
+				<lightning-layout-item size="6" class="card-fields">
+					<div>
+						<label class="slds-form-element__label" for="slds-box">Preço de lista</label>
+						<p 
+							id="slds-box" 
+							class="slds-box slds-box_xx-small price-list">
+							<lightning-formatted-number
+								class="slds-text-align_center"
+								value={orderItem.listPrice}
+								maximum-fraction-digits="2"
+								minimum-fraction-digits="2"
+								format-style="currency">
+							</lightning-formatted-number>
+						</p>
+					</div>
+				</lightning-layout-item>
+				<lightning-layout-item size="6" class="card-fields">
+					<div class="slds-form-element">
+						<label class="slds-form-element__label" for="text-input-id-57">Quantidade</label>
+						<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left-right">
+							<button	class="slds-button slds-button_icon slds-input__icon slds-input__icon_left" onclick={onClickQuantityDash}>
+								<lightning-icon icon-name='utility:dash' alternative-text='dash' size='xx-small' title='Diminuir'></lightning-icon>
+								<span class="slds-assistive-text">Diminuir</span>
+							</button>
+							<input 
+								id="text-input-id-57" 
+								class="slds-input slds-text-align_center"
+								inputmode="numeric"
+								value={orderItem.quantity}
+								oninput={changeQuantity}
+							/>
+							<button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" onclick={onClickQuantityPlus}>
+								<lightning-icon icon-name='utility:add' alternative-text='dash' size='xx-small' title='Aumentar'></lightning-icon>
+								<span class="slds-assistive-text">Aumentar</span>
+							</button>
+						</div>
+					</div>
+				</lightning-layout-item>
+                <lightning-layout-item size="6" class="card-fields">
+					<div>
+						<span>Preço de lista total:</span>
+						<p>
+							<lightning-formatted-number
+								value={totalListPrice}
+								maximum-fraction-digits="2"
+								format-style="currency">
+							</lightning-formatted-number>
+						</p>
+					</div>
+				</lightning-layout-item>
+                <lightning-layout-item size="6" class="card-fields">
+					<div>
+						<span class="title-field">Preço total:</span>
+						<p>
+							<lightning-formatted-number
+								value={orderItem.totalPrice}
+								maximum-fraction-digits="2"
+								format-style="currency">
+							</lightning-formatted-number>
+						</p>
+					</div>
+				</lightning-layout-item>
+			</lightning-layout>
+		</div>
+	</div>
+</template>

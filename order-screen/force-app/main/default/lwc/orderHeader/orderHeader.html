@@ -1,0 +1,109 @@
+<template>
+    <div>
+        <lightning-card>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-var-p-horizontal_small slds-col slds-size_6-of-12 slds-var-m-bottom_medium">
+                    <div class="slds-form-element">
+                        <c-lookup
+                            input-label="Cliente"
+                            placeholder="Selecione uma conta"
+                            target-object="Account"
+                            object-icon-name="standard:person_account"
+                            record-id={selectedAccountId}
+                            search-field-list={accountFields}
+                            text-options={accountOptions}
+                            onselectrecord={handleAccountValue}
+                            onclearselectedrecord={clearAccount}
+                            required>
+                        </c-lookup>
+                    </div>
+                </div>
+                
+                <div class="slds-var-p-horizontal_small slds-col slds-size_6-of-12 slds-var-m-bottom_medium">
+                    <div class="slds-form-element">
+                        <c-lookup
+                            input-label="Condição de pagamento"
+                            object-icon-name="standard:payment_gateway"
+                            placeholder="Selecione uma forma de pagamento"
+                            target-object="PaymentTerms__c"
+                            record-id={orderHeaderData.paymentConditionId}
+                            search-field-list={paymentFields}
+                            text-options={paymentOptions}
+                            onselectrecord={handlePaymentCondition}
+                            onclearselectedrecord={clearPaymentCondititon}
+                            required>
+                        </c-lookup>
+                    </div>
+                </div>
+
+                <div class="slds-var-p-horizontal_small slds-col slds-size_6-of-12 slds-var-m-bottom_medium">
+                    <div class="slds-form-element">
+                        <c-lookup
+                            input-label="Endereço de entrega"
+                            object-icon-name="standard:address"
+                            placeholder="Selecione um endereço"
+                            target-object="AccountAddress__c"
+                            record-id={orderHeaderData.addressId}
+                            search-field-list={addressFields}
+                            text-options={addressOptions}
+                            where-field-value-list={addressAccountId}
+                            where-field-list={addressWhereFieldList}
+                            operator-list={addressOperator}
+                            onselectrecord={handleAddress}
+                            onclearselectedrecord={clearAccountAddress}
+                            required>
+                        </c-lookup>
+                    </div>
+                </div>
+
+                <div class="slds-var-p-horizontal_small slds-col slds-size_6-of-12 slds-var-m-bottom_medium">
+                    <div class="slds-form-element">
+                        <c-lookup
+                            input-label="Catálogo de preço"
+                            object-icon-name="standard:price_books"
+                            target-object="Pricebook2"
+                            record-id={defaultPricebookId}
+                            search-field-list={pricebookFields}
+                            text-options={pricebookOptions}
+                            onselectrecord={handlePricebook}
+                            onclearselectedrecord={clearAccount}
+                            disabled=true
+                            required>
+                        </c-lookup>
+                    </div>
+                </div>
+
+                <div class="slds-var-p-horizontal_small slds-col slds-size_12-of-12 slds-var-m-bottom_medium">
+                    <div class="slds-form-element">
+                        <lightning-textarea
+                            label="Observações" 
+                            placeholder="Escreva aqui considerações ou observações a respeito do pedido..."
+                            value={orderHeaderData.description} 
+                            onchange={handleDescription}>
+                        </lightning-textarea>
+                    </div>
+                </div>
+
+                <div slot="footer" class="slds-var-p-horizontal_small slds-col slds-size_12-of-12 slds-var-m-bottom_medium">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-button 
+                                class="slds-float_left"
+                                label="Cancelar" 
+                                onclick={handleCancel}>
+                            </lightning-button>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-button 
+                                class="slds-float_right"
+                                label="Adicionar produtos"
+                                variant="brand"
+                                onclick={handleOrder}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>
