@@ -59,7 +59,7 @@ export default class OrderSummary extends NavigationMixin(LightningElement) {
 
             this.sendOrderData();
             this.resetOrderScreen();
-            this.navigateToOrderList();
+            this.navigateToOrderRecordPage();
         }
         else {
             this.handlerToast('Produto já cadastrado na base de dados', '', 'warning');
@@ -67,13 +67,13 @@ export default class OrderSummary extends NavigationMixin(LightningElement) {
     
     }
 
-    navigateToOrderList() {
+    navigateToOrderRecordPage() {
         this[NavigationMixin.Navigate]({
-            type: 'standard__objectPage',
+            type: 'standard__recordPage',
             attributes: {
                 recordId: this.orderId,
                 objectApiName: 'Order',
-                actionName: 'list'
+                actionName: 'view'
             }
         });
 

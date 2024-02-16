@@ -5,39 +5,35 @@ import getOrderById from '@salesforce/apex/OrderDataController.getOrderById';
 
 export default class OrderPage extends LightningElement {
     @track current = 'step1';
-    @track accountId = null;
+    @track accountRecordId = null;
     @track orderId = null;
     @track showOrderHeader = true;
     @track showOrderItem = false;
     @track showOrderSummary = false;
-    currentOrder = '';
+    @track currentOrder = '';
 
     @track orderHeaderData = {};
     @track orderItemData = [{}];
     @track deletedOrderItems = [];
 
-    @api selectedAccountId = null;
-    @api selectedOrderId = null;
+    @api accountId;
+    @api recordId;
 
-    get selectedAccountId() { return this.accountId }
-    get selectedOrderId() { return this.orderId }
-
-    @wire(CurrentPageReference)
-    handlePageReference(currentPageReference) {
-        if (currentPageReference) {
-            const state = currentPageReference.state;
-            if (state.hasOwnProperty('c__accountId') && !state.hasOwnProperty('c__orderId')) {
-                this.accountId = state.c__accountId;
-            } else if (!state.hasOwnProperty('c__accountId') && state.hasOwnProperty('c__orderId')) {
-                this.orderId = state.c__orderId;
-            }
+    get getAccountId() { 
+        return this.isFilled(this.accountId)? this.accountRecordId = this.accountId: null;
+    }
+   
+    connectedCallback() {
+        this.loadVariable();
+        if (this.isFilled(this.recordId)) {
+            this.getOrder(this.recordId);
         }
     }
 
-    connectedCallback() {
-        getOrderById({ orderId: this.orderId })
+    getOrder(orderId){
+        getOrderById({ orderId: orderId })
             .then(result => {
-                if (result) {
+                if (this.isFilled(result)) {
                     const { mappedHeaderData, mappedItemData } = this.mapOrderData(result);
                     this.orderHeaderData = mappedHeaderData;
                     this.orderItemData = mappedItemData;
@@ -50,20 +46,25 @@ export default class OrderPage extends LightningElement {
             });
     }
 
+    async loadVariable() {
+        await this.recordId;
+    }
+    
     mapOrderData(data) {
         const { orderData, orderItemsDataList } = data;
     
         const mappedHeaderData = {
             orderId: orderData.Id,
-            accountId: orderData.AccountId,
+            accountId: orderData.Account.Id,
             accountName: orderData.Account.Name,
-            addressId: orderData.AccountAddress__c,
-            addressName: orderData.AccountAddress__r.Name,
-            paymentConditionId: orderData.PaymentTerms__c,
-            paymentConditionName: orderData.PaymentTerms__r.Name,
+            addressId: this.isFilled(orderData.AccountAddress__c) ? orderData.AccountAddress__c : null,
+            addressName: this.isFilled(orderData.AccountAddress__r) ? orderData.AccountAddress__r.Name : null,
+            paymentConditionId: this.isFilled(orderData.PaymentTerms__c) ? orderData.PaymentTerms__c : null,
+            paymentConditionName: this.isFilled(orderData.PaymentTerms__r) ? orderData.PaymentTerms__r.Name : null,
             pricebookId: orderData.Pricebook2Id,
             description: orderData.Observations__c
         };
+
         const mappedItemData = orderItemsDataList.map(item => ({
             orderItemId: item.Id,
             orderId: item.OrderId,
@@ -147,7 +148,6 @@ export default class OrderPage extends LightningElement {
 
     handleBackToOrderHeader() {
         const orderHeaderComponent = this.template.querySelector('c-order-header');
-        
         if (orderHeaderComponent) {
             orderHeaderComponent.receiveDataFromParent(this.orderHeaderData);
         } else {
@@ -157,7 +157,6 @@ export default class OrderPage extends LightningElement {
 
     handleBackToOrderItem(){
         const orderItemComponent = this.template.querySelector('c-order-item');
-
         if (orderItemComponent) {
             orderItemComponent.receiveDataFromParent(this.orderItemData);
         } else {
@@ -180,5 +179,9 @@ export default class OrderPage extends LightningElement {
                 this.handleBackToOrderItem();
             }, 10);
         }
+    }
+
+    isFilled(field) {
+        return ((field !== undefined && field != null && field != '') || field == 0);
     }
 }

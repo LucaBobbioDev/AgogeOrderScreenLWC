@@ -17,7 +17,7 @@
         <div class="slds-show slds-var-m-around_small">
             <template if:true={showOrderHeader}>
                 <c-order-header
-                    account-id={selectedAccountId}
+                    account-id={getAccountId}
                     oncleardata={handleClearOrderHeader}
                     onorderheader={handleOrderHeader}
                     oncleanaccount={handleCleanAccount}>

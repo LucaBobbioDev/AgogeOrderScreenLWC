@@ -22,13 +22,31 @@ export default class OrderHeader extends NavigationMixin(LightningElement) {
         description: ''
     };
 
-    @api
-    receiveDataFromParent(data) {
-        this.orderHeaderData = Object.assign(this.orderHeaderData, data);
-    }
-
+    accountFields = ['Name'];
+    accountOptions = { title: 'Name' };
     get selectedAccountId() {
         return this.accountId ? this.accountId : this.orderHeaderData.accountId;
+    }
+    
+    addressFields = ['Logradouro__c'];
+    addressOptions = { title: 'Logradouro__c'};
+    addressOperator = ['='];
+    addressWhereFieldList = ['Account__c'];
+    get addressAccountId() { 
+        return [this.orderHeaderData.accountId] 
+    }
+    
+    paymentFields = ['Name'];
+    paymentOptions = { title: 'Name'};
+
+    pricebookFields = ['Name'];
+    pricebookOptions = { title: 'Name'};
+    pricebookOperator = ['='];
+    pricebookWhereFieldList = ['IsStandard'];
+    pricebookWhereFieldListValue = [true];
+
+    @api receiveDataFromParent(data) {
+        this.orderHeaderData = Object.assign(this.orderHeaderData, data);
     }
 
     @wire(getDefaultPricebook)
@@ -46,7 +64,6 @@ export default class OrderHeader extends NavigationMixin(LightningElement) {
         this.accountId = event.detail.record.Id
         this.orderHeaderData.accountId = event.detail.record.Id;
         this.orderHeaderData.accountName = event.detail.record.Name;
-        clearPaymentCondititon();
     }
 
     handlePaymentCondition(event) {
@@ -62,7 +79,6 @@ export default class OrderHeader extends NavigationMixin(LightningElement) {
     handlePricebook(event) {
         this.orderHeaderData.pricebookId = event.detail.record.Id;
         this.orderHeaderData.pricebookName = event.detail.record.Name;
-
     }
 
     handleDescription(event) {
@@ -141,7 +157,7 @@ export default class OrderHeader extends NavigationMixin(LightningElement) {
             attributes: {
                 recordId: this.recordId,
                 objectApiName: 'Account',
-                actionName: 'list'
+                actionName: 'view'
             }
         });
         this.clearOrderData();
@@ -176,22 +192,4 @@ export default class OrderHeader extends NavigationMixin(LightningElement) {
             )
 		);
 	}
-
-    accountFields = ['Name'];
-    accountOptions = { title: 'Name' };
-    
-    addressFields = ['Logradouro__c'];
-    addressOptions = { title: 'Logradouro__c'};
-    addressOperator = ['='];
-    addressWhereFieldList = ['Account__c'];
-    get addressAccountId() { return [this.orderHeaderData.accountId] }
-    
-    paymentFields = ['Name'];
-    paymentOptions = { title: 'Name'};
-
-    pricebookFields = ['Name'];
-    pricebookOptions = { title: 'Name'};
-    pricebookOperator = ['='];
-    pricebookWhereFieldList = ['IsStandard'];
-    pricebookWhereFieldListValue = [true];
 }
