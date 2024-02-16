@@ -7,22 +7,40 @@
                     <name>actionNames</name>
                     <valueList>
                         <valueListItems>
-                            <value>Account.Create_Order</value>
+                            <value>Edit</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>CallHighlightAction</value>
+                            <value>Delete</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Order.Order</value>
                         </valueListItems>
                         <valueListItems>
                             <value>FeedItem.TextPost</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Edit</value>
-                        </valueListItems>
-                        <valueListItems>
                             <value>FeedItem.ContentPost</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>FeedItem.RypplePost</value>
+                            <value>Global.NewEvent</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.NewTask</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.NewContact</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.LogACall</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.NewOpportunity</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.NewCase</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Global.NewLead</value>
                         </valueListItems>
                         <valueListItems>
                             <value>FeedItem.LinkPost</value>
@@ -31,61 +49,28 @@
                             <value>FeedItem.PollPost</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>ChangeOwnerOne</value>
+                            <value>FeedItem.QuestionPost</value>
                         </valueListItems>
                         <valueListItems>
                             <value>ChangeRecordType</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>SendSurveyInvitation</value>
+                            <value>Clone</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Delete</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>AccountHierarchy</value>
+                            <value>ChangeOwnerOne</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Share</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>RecordShareHierarchy</value>
+                            <value>ActivateOrder</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>IncludeOffline</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>DisableCustomerPortalAccount</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>CreateSurveyInvitation</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>XClean</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>PartnerScorecard</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>CreateCallList</value>
+                            <value>Deactivate</value>
                         </valueListItems>
                         <valueListItems>
                             <value>PrintableView</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>CreateAccountChannel</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>CreatePartnerChannelQuickAction</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>SmsHighlightAction</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>EmailHighlightAction</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>WebsiteHighlightAction</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -107,7 +92,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>numVisibleActions</name>
-                    <value>4</value>
+                    <value>3</value>
                 </componentInstanceProperties>
                 <componentName>force:highlightsPanel</componentName>
                 <identifier>force_highlightsPanel</identifier>
@@ -121,13 +106,22 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>displayOption</name>
-                    <value>BOTH</value>
+                    <name>hideUpdateButton</name>
+                    <value>false</value>
                 </componentInstanceProperties>
-                <componentName>runtime_sales_merge:mergeCandidatesPreviewCard</componentName>
-                <identifier>runtime_sales_merge_mergeCandidatesPreviewCard</identifier>
+                <componentInstanceProperties>
+                    <name>variant</name>
+                    <value>linear</value>
+                </componentInstanceProperties>
+                <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
+                <identifier>runtime_sales_pathassistant_pathAssistant</identifier>
             </componentInstance>
         </itemInstances>
+        <mode>Replace</mode>
+        <name>subheader</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
@@ -164,17 +158,6 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>runtime_sales_social:socialPanel</componentName>
-                <identifier>runtime_sales_social_socialPanel</identifier>
-            </componentInstance>
-        </itemInstances>
-        <mode>Replace</mode>
-        <name>newsTabContent</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
                     <name>active</name>
                     <value>true</value>
@@ -203,20 +186,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>detailTab</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>newsTabContent</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Standard.Tab.news</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>newsTab</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -256,17 +225,6 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>forceChatter:recordFeedContainer</componentName>
-                <identifier>forceChatter_recordFeedContainer</identifier>
-            </componentInstance>
-        </itemInstances>
-        <mode>Replace</mode>
-        <name>feedTabContent</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
                     <name>active</name>
                     <value>true</value>
@@ -281,20 +239,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>activityTab</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>feedTabContent</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Standard.Tab.collaborate</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>collaborateTab</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -316,11 +260,11 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Conta Página de registro</masterLabel>
-    <parentFlexiPage>sfa__Account_rec_L</parentFlexiPage>
-    <sobjectType>Account</sobjectType>
+    <masterLabel>Order Consuma Bem Page</masterLabel>
+    <parentFlexiPage>commerce__Order_rec_L_subheader</parentFlexiPage>
+    <sobjectType>Order</sobjectType>
     <template>
-        <name>flexipage:recordHomeTemplateDesktop</name>
+        <name>flexipage:recordHomeWithSubheaderTemplateDesktop</name>
     </template>
     <type>RecordPage</type>
 </FlexiPage>
